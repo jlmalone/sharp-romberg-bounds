@@ -30,6 +30,23 @@ Volume I, Chapter 5, describe interpolation in squared step size for general
 step sequences and positivity of the Peano kernels for the classical Romberg
 table.
 
+The early general literature includes:
+
+- A. Meir and A. Sharma, “On the Method of Romberg Quadrature,” SIAM Series B
+  2 (1965), 250–258;
+- A. H. Stroud, “Error Estimates for Romberg Quadrature,” SIAM Series B 2
+  (1965), 480–488;
+- R. Bulirsch and J. Stoer, “Asymptotic Upper and Lower Bounds for Results of
+  Extrapolation Methods,” Numerische Mathematik 8 (1966), 93–104;
+- R. Bulirsch and J. Stoer, “Numerical Quadrature by Extrapolation,”
+  Numerische Mathematik 9 (1967), 271–278; and
+- R. E. Lynch, “Generalized Trapezoid Formulas and Errors in Romberg
+  Quadrature,” in the Blanch Anniversary Volume (1967), 215–229.
+
+Their titles and metadata place them close to the extrapolation and error-bound
+framework. The complete texts must be compared with the ratio theorem for
+finite positive Laplace transforms, especially the 1966 Bulirsch--Stoer paper.
+
 Torsten Ström published:
 
 - “Strict error bounds in Romberg quadrature,” BIT 7 (1967), 314–321.
@@ -79,21 +96,24 @@ This is an apparently novel result, not certified novelty.
 
 ## Remaining risks
 
-1. Albrecht's interval-enclosure paper may contain an equivalent consequence.
-2. Ström's full papers may encode the ratio bounds in older notation.
-3. Förster or Brass--Fischer may contain a stronger comparison theorem.
-4. Definiteness monographs may contain a stronger comparison theorem.
-5. The product-kernel representation may be known in the Stieltjes-function
+1. Bulirsch--Stoer's general extrapolation bounds may specialize to an
+   equivalent ratio or enclosure.
+2. Albrecht's interval-enclosure paper may contain an equivalent consequence.
+3. Stroud, Lynch, or Ström may encode the ratio bounds in older notation.
+4. Förster or Brass--Fischer may contain a stronger comparison theorem.
+5. Definiteness monographs may contain a stronger comparison theorem.
+6. The product-kernel representation may be known in the Stieltjes-function
    interpolation literature.
-6. A referee may view the block estimate as an elementary corollary of
+7. A referee may view the block estimate as an elementary corollary of
    established monotonicity theory.
 
 ## Required independent search
 
 Before submission:
 
-1. inspect the complete Albrecht 1972, Ström 1967 and 1972, Förster 1982, and
-   Brass--Fischer 1999 papers;
+1. inspect the complete Meir--Sharma 1965, Stroud 1965, Bulirsch--Stoer 1966
+   and 1967, Lynch 1967, Albrecht 1972, Ström 1967 and 1972, Förster 1982,
+   and Brass--Fischer 1999 papers;
 2. search MathSciNet and zbMATH using “error ratio,” “successive Romberg,”
    “interval enclosure,” “definite quadrature,” and “arbitrary step sequence,”
    including German equivalents;
