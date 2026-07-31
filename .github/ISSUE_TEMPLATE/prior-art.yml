@@ -1,0 +1,25 @@
+name: Prior art
+description: Report a source that may anticipate a theorem or corollary.
+title: "Prior art: "
+body:
+  - type: input
+    id: citation
+    attributes:
+      label: Citation or DOI
+      description: Provide a stable bibliographic reference.
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: Exact location
+      description: Give the theorem, proposition, equation, or page.
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Comparison
+      description: Explain whether the source proves the same sharp constants, hypotheses, and consequences.
+    validations:
+      required: true

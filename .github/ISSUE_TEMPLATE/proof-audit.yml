@@ -1,0 +1,25 @@
+name: Proof audit
+description: Report a proof gap, correction, or exact counterexample.
+title: "Proof: "
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: The theorem, lemma, equation, or line at issue.
+    validations:
+      required: true
+  - type: textarea
+    id: objection
+    attributes:
+      label: Mathematical objection
+      description: State the precise gap or counterexample and all hypotheses.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+      description: Give a minimal repair if one is known.
+    validations:
+      required: false

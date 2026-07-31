@@ -1,0 +1,675 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\bN}{\boldsymbol{n}}
+\newcommand{\bY}{\boldsymbol{y}}
+\newcommand{\1}{\mathbf{1}}
+
+\title{Sharp Mesh-Dilation Bounds for Arbitrary Romberg
+Extrapolation of Completely Monotone Integrands}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let \(R_{\bN}(f)\) be the value at zero obtained by interpolating
+composite trapezoidal approximations \(T_{n_j}(f)\) polynomially in
+\(n_j^{-2}\), where \(n_1,\ldots,n_m\) are arbitrary distinct positive
+integers. For every nonconstant finite positive Laplace transform \(f\) on a
+compact interval and every integer refinement factor \(q\ge2\), we prove the
+sharp inequality
+\[
+q^{-2m}
+<
+\frac{R_{q\bN}(f)-I(f)}
+     {R_{\bN}(f)-I(f)}
+<
+q^{-1}.
+\]
+Both constants are approached by exponential integrands, at zero and infinite
+decay rate respectively. The ratio bound gives a computable strict enclosure
+of the integral between two affine combinations of the coarse and refined
+extrapolants. It also yields an exact classification of every affine blend as
+a universal upper bound, a universal lower bound, or a rule with no fixed
+sign. For twofold refinement, the lower endpoint is midpoint extrapolation and
+the upper endpoint gives the sharp midpoint--trapezoid threshold. The proof
+uses a positive origin-interpolation formula for complete Bernstein kernels
+and a sharp comparison between a decreasing spectral sum and its subsequence
+indexed by multiples of \(q\).
+\end{abstract}
+
+\noindent\textbf{Keywords.}
+Romberg quadrature; Richardson extrapolation; completely monotone function;
+Laplace transform; trapezoidal rule; certified integration.
+
+\medskip
+\noindent\textbf{MSC 2020.}
+65D30; 26A48; 41A05.
+
+\section{Introduction}
+
+Romberg quadrature accelerates the composite trapezoidal rule by polynomial
+extrapolation in the squared mesh width. Its classical dyadic table has
+positive Peano kernels and supplies one-sided estimates under derivative-sign
+hypotheses. Positivity, monotonicity, strict error bounds, and nonclassical
+refinement sequences have a substantial literature
+\cite{Albrecht1972,DahlquistBjorck,Strom1967,Strom1972,
+Foerster1982,BrassFischer1999,Fischer2002,BrassPetras}.
+
+This paper considers the cone
+\[
+f(x)=\int_{[0,\infty)}e^{-tx}\,d\mu(t),
+\]
+where \(\mu\) is a finite positive measure. By the Bernstein--Widder theorem,
+this is the class of completely monotone functions on \([0,\infty)\) with
+finite value at zero, restricted to the interval of integration
+\cite{Widder,SchillingSongVondracek}. The representation permits a direct
+spectral analysis of the complete trapezoidal error rather than an estimate
+through finitely many derivatives.
+
+Fix arbitrary distinct panel counts \(n_1,\ldots,n_m\). Let \(R_{\bN}(f)\)
+be the origin value of the polynomial interpolating \(T_{n_j}(f)\) in
+\(n_j^{-2}\). If every panel count is multiplied by an integer \(q\ge2\), the
+error contracts by a factor strictly between \(q^{-2m}\) and \(q^{-1}\).
+The lower constant is the local, small-decay scaling of the order-\(2m\)
+extrapolation error. The upper constant is the density of multiples of \(q\)
+in the spectral lattice. Both constants are sharp.
+
+The ratio theorem gives two computable bounds:
+\[
+\frac{qR_{q\bN}(f)-R_{\bN}(f)}{q-1}
+<
+I(f)
+<
+\frac{q^{2m}R_{q\bN}(f)-R_{\bN}(f)}{q^{2m}-1}.
+\]
+It also identifies every universally signed affine blend of the two
+extrapolants. The upper endpoint is the usual Richardson combination. The
+lower endpoint is the extrapolate of the equal-weight rule supported precisely
+on the new nodes introduced by \(q\)-fold refinement. For \(q=2\), that rule
+is the composite midpoint rule.
+
+The proof has four short components. First, extrapolating
+\(y/(y+s)\) from positive nodes to zero produces a positive product. Second,
+the exponential trapezoidal error is expanded using \(x\coth x-1\). Third, a
+strictly decreasing positive sequence is compared with its \(q\)-multiple
+subsequence. Finally, positive Laplace mixtures preserve the resulting ratio
+interval.
+
+\section{Quadrature and extrapolation}
+
+Fix \(L>0\). Let \(\cC_L\) be the class of functions
+\begin{equation}
+f(x)=\int_{[0,\infty)}e^{-tx}\,d\mu(t),
+\qquad 0\le x\le L,
+\label{eq:laplace-class}
+\end{equation}
+where \(\mu\) is a finite positive Borel measure. Define
+\[
+I(f)=\int_0^L f(x)\,dx
+\]
+and let
+\begin{equation}
+T_n(f)
+=
+\frac{L}{n}
+\left[
+\frac{f(0)+f(L)}{2}
++\sum_{r=1}^{n-1}f\left(\frac{rL}{n}\right)
+\right]
+\label{eq:trapezoid}
+\end{equation}
+be the composite trapezoidal rule with \(n\) equal panels.
+
+Let
+\[
+\bN=(n_1,\ldots,n_m)
+\]
+consist of distinct positive integers and set \(y_j=n_j^{-2}\). The
+extrapolate \(R_{\bN}(f)\) is the value at zero of the unique polynomial of
+degree at most \(m-1\) satisfying
+\[
+P(y_j)=T_{n_j}(f),\qquad j=1,\ldots,m.
+\]
+No ordering or geometric relation among the \(n_j\) is assumed. For an integer
+\(q\ge2\), write \(q\bN=(qn_1,\ldots,qn_m)\).
+
+\begin{remark}
+The Lagrange weights at zero are invariant under common positive scaling of
+all interpolation nodes. Thus \(R_{q\bN}(f)\) may be evaluated using the
+nodes \(q^{-2}y_j\) or, equivalently, the original nodes \(y_j\) with the
+trapezoidal error profile dilated by \(q^{-2}\).
+\end{remark}
+
+\section{A positive origin-interpolation formula}
+
+For distinct positive nodes \(\bY=(y_1,\ldots,y_m)\), let
+\(\Lambda_{\bY}g\) denote the value at zero of the degree-\((m-1)\)
+polynomial interpolating \(g\) at those nodes.
+
+\begin{lemma}[Origin interpolation]
+\label{lem:origin}
+For \(s>0\), let \(h_s(y)=y/(y+s)\). Then
+\begin{equation}
+\Lambda_{\bY}h_s
+=K_{\bY}(s)
+:=\prod_{j=1}^{m}\frac{y_j}{y_j+s}.
+\label{eq:kernel}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let \(P\) interpolate \(h_s\) at \(\bY\). The numerator in
+\[
+h_s(y)-P(y)
+=\frac{y-(y+s)P(y)}{y+s}
+\]
+is a polynomial of degree at most \(m\) that vanishes at every \(y_j\).
+Consequently,
+\[
+y-(y+s)P(y)=C\prod_{j=1}^{m}(y-y_j).
+\]
+Evaluation at \(y=-s\) determines \(C\). Evaluation at \(y=0\) then gives
+\[
+P(0)=\prod_{j=1}^{m}\frac{y_j}{y_j+s}.
+\]
+\end{proof}
+
+\begin{proposition}[Complete Bernstein error profile]
+\label{prop:cbf}
+For \(f\in\cC_L\), define
+\begin{equation}
+\Phi_f(y)
+=
+\int_{(0,\infty)}
+I_t\left[x_t(y)\coth x_t(y)-1\right]\,d\mu(t),
+\label{eq:error-profile}
+\end{equation}
+where
+\[
+I_t=\frac{1-e^{-tL}}{t},
+\qquad
+x_t(y)=\frac{tL\sqrt{y}}{2}.
+\]
+Then \(\Phi_f\) is a complete Bernstein function with zero constant and
+linear terms, and
+\begin{equation}
+\Phi_f(n^{-2})=T_n(f)-I(f).
+\label{eq:profile-samples}
+\end{equation}
+More precisely,
+\begin{equation}
+\Phi_f(y)
+=
+2\int_{(0,\infty)}
+I_t\sum_{k=1}^{\infty}
+\frac{y}{y+c_tk^2}\,d\mu(t),
+\qquad
+c_t=\left(\frac{2\pi}{tL}\right)^2.
+\label{eq:cbf-representation}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For \(f_t(x)=e^{-tx}\), a geometric sum in \eqref{eq:trapezoid} gives
+\begin{equation}
+\frac{T_n(f_t)}{I_t}
+=x\coth x,
+\qquad
+x=\frac{tL}{2n}.
+\label{eq:xcoth}
+\end{equation}
+The product expansion of \(\sinh x/x\), followed by logarithmic
+differentiation, gives
+\begin{equation}
+x\coth x-1
+=2\sum_{k=1}^{\infty}
+\frac{x^2}{x^2+\pi^2k^2}.
+\label{eq:mittag}
+\end{equation}
+Substitution yields \eqref{eq:cbf-representation}. This is the standard
+integral form of a complete Bernstein function.
+
+All summands are nonnegative, so Tonelli's theorem applies. The bound
+\[
+0<x\coth x-1<x
+\]
+also gives
+\[
+0\le\Phi_f(y)
+\le \frac{L\sqrt{y}}{2}\mu((0,\infty)).
+\]
+Thus \(\Phi_f(y)/y\to0\) at infinity, which rules out a linear term in its
+complete Bernstein representation. Equation \eqref{eq:profile-samples}
+follows from \eqref{eq:xcoth}, linearity, and exactness on the constant
+component corresponding to \(t=0\).
+\end{proof}
+
+\begin{corollary}[Positive arbitrary-mesh error]
+\label{cor:positive-error}
+For \(f\in\cC_L\),
+\begin{equation}
+R_{\bN}(f)-I(f)
+=
+2\int_{(0,\infty)}
+I_t
+\sum_{k=1}^{\infty}K_{\bY}(c_tk^2)
+\,d\mu(t).
+\label{eq:positive-error}
+\end{equation}
+In particular, \(R_{\bN}(f)>I(f)\) whenever \(f\) is nonconstant.
+\end{corollary}
+
+\begin{proof}
+Apply \(\Lambda_{\bY}\) to \eqref{eq:cbf-representation} and use
+\cref{lem:origin}. The interpolation functional is a finite linear
+combination of finite values, and the resulting representation is positive.
+\end{proof}
+
+\section{The sharp mesh-dilation ratio}
+
+The arithmetic estimate below supplies both sharp constants.
+
+\begin{lemma}[Spectral subsequence ratio]
+\label{lem:spectral}
+Let \(c>0\), let \(q\ge2\) be an integer, and define
+\[
+a_k=K_{\bY}(ck^2),\qquad k\ge1.
+\]
+Then
+\begin{equation}
+q^{-2m}
+<
+\frac{\sum_{k=1}^{\infty}a_{qk}}
+     {\sum_{k=1}^{\infty}a_k}
+<
+q^{-1}.
+\label{eq:spectral-ratio}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For every \(k\),
+\[
+\frac{a_{qk}}{a_k}
+=
+\prod_{j=1}^{m}
+\frac{y_j+ck^2}{y_j+cq^2k^2}
+>q^{-2m}.
+\]
+Summation proves the lower inequality.
+
+The sequence \(a_k\) is strictly decreasing. Partition the positive integers
+into consecutive blocks of length \(q\). In the \(k\)-th block,
+\[
+\sum_{r=1}^{q}a_{q(k-1)+r}>q\,a_{qk}.
+\]
+Summation over all blocks proves the upper inequality.
+\end{proof}
+
+\begin{theorem}[Sharp mesh-dilation bounds]
+\label{thm:main}
+Let \(f\in\cC_L\) be nonconstant. For every \(m\ge1\), every vector
+\(\bN\) of distinct positive panel counts, and every integer \(q\ge2\),
+\begin{equation}
+\boxed{
+q^{-2m}
+<
+\frac{R_{q\bN}(f)-I(f)}
+     {R_{\bN}(f)-I(f)}
+<
+q^{-1}.}
+\label{eq:main}
+\end{equation}
+Both constants are optimal uniformly over \(\cC_L\).
+\end{theorem}
+
+\begin{proof}
+For a single exponential \(f_t\), equations
+\eqref{eq:positive-error} and the common-scaling invariance give
+\[
+R_{\bN}(f_t)-I_t
+=2I_t\sum_{k=1}^{\infty}K_{\bY}(c_tk^2)
+\]
+and
+\[
+R_{q\bN}(f_t)-I_t
+=2I_t\sum_{k=1}^{\infty}K_{\bY}(c_tq^2k^2).
+\]
+Lemma~\ref{lem:spectral} proves \eqref{eq:main} for every \(t>0\).
+
+For a general \(f\), let \(E(t)\) and \(E_q(t)\) denote these two positive
+single-exponential errors. Then
+\[
+\frac{R_{q\bN}(f)-I(f)}{R_{\bN}(f)-I(f)}
+=
+\frac{\int E_q(t)\,d\mu(t)}{\int E(t)\,d\mu(t)}
+\]
+is a weighted average of \(E_q(t)/E(t)\), with positive weights
+\(E(t)\,d\mu(t)\). Because a nonconstant \(f\) has positive representing mass
+on \((0,\infty)\), both inequalities remain strict.
+
+It remains to prove optimality. As \(t\to0^+\), \(c_t\to\infty\), and
+\[
+c_t^mK_{\bY}(c_tk^2)
+\longrightarrow
+\left(\prod_{j=1}^{m}y_j\right)k^{-2m}.
+\]
+Moreover,
+\[
+c_t^mK_{\bY}(c_tk^2)
+\le
+\left(\prod_{j=1}^{m}y_j\right)k^{-2m}.
+\]
+Dominated convergence therefore shows that the ratio for \(f_t\) tends to
+\(q^{-2m}\).
+
+As \(t\to\infty\), \(c_t\to0\). Put
+\[
+g(u)=K_{\bY}(u^2).
+\]
+The function \(g\) is continuous and integrable on \((0,\infty)\): it is
+bounded near zero and \(O(u^{-2m})\) at infinity. Hence
+\[
+\sqrt{c_t}\sum_{k=1}^{\infty}g(k\sqrt{c_t})
+\longrightarrow
+\int_0^\infty g(u)\,du,
+\]
+whereas
+\[
+\sqrt{c_t}\sum_{k=1}^{\infty}g(qk\sqrt{c_t})
+\longrightarrow
+\frac1q\int_0^\infty g(u)\,du.
+\]
+The ratio tends to \(q^{-1}\). Both endpoint constants are therefore sharp
+within the exponential subfamily.
+\end{proof}
+
+\begin{corollary}[Strict contraction]
+\label{cor:contraction}
+Under the hypotheses of \cref{thm:main},
+\[
+I(f)<R_{q\bN}(f)<R_{\bN}(f).
+\]
+\end{corollary}
+
+\section{Certified bounds and affine blends}
+
+Write
+\[
+A=R_{\bN}(f),
+\qquad
+B=R_{q\bN}(f).
+\]
+
+\begin{corollary}[Two-sided enclosure]
+\label{cor:enclosure}
+Every nonconstant \(f\in\cC_L\) satisfies
+\begin{equation}
+\boxed{
+\frac{qB-A}{q-1}
+<
+I(f)
+<
+\frac{q^{2m}B-A}{q^{2m}-1}.}
+\label{eq:enclosure}
+\end{equation}
+Both affine coefficients are optimal uniformly over \(\cC_L\).
+\end{corollary}
+
+\begin{proof}
+Let
+\[
+r=\frac{B-I(f)}{A-I(f)}.
+\]
+Solving for the integral gives
+\[
+I(f)=\frac{B-rA}{1-r}.
+\]
+Since \(B<A\), the right-hand side is strictly decreasing in \(r\).
+Substitution of \(q^{-2m}<r<q^{-1}\) proves
+\eqref{eq:enclosure}. Optimality follows from the endpoint families in
+\cref{thm:main}.
+\end{proof}
+
+For \(\beta\in\R\), define
+\[
+Q_\beta(f)=(1-\beta)A+\beta B.
+\]
+
+\begin{theorem}[Complete affine-blend classification]
+\label{thm:blend}
+The inequality
+\[
+Q_\beta(f)\ge I(f)
+\]
+holds for every \(f\in\cC_L\) if and only if
+\begin{equation}
+\beta\le\frac{q^{2m}}{q^{2m}-1}.
+\label{eq:upper-beta}
+\end{equation}
+The reverse inequality
+\[
+Q_\beta(f)\le I(f)
+\]
+holds for every \(f\in\cC_L\) if and only if
+\begin{equation}
+\beta\ge\frac{q}{q-1}.
+\label{eq:lower-beta}
+\end{equation}
+For
+\[
+\frac{q^{2m}}{q^{2m}-1}
+<
+\beta
+<
+\frac{q}{q-1},
+\]
+the error has no universal sign.
+\end{theorem}
+
+\begin{proof}
+For nonconstant \(f\),
+\[
+Q_\beta(f)-I(f)
+=(A-I(f))\bigl[1-\beta(1-r)\bigr],
+\]
+where \(r\) ranges sharply over
+\((q^{-2m},q^{-1})\). The bracket is nonnegative throughout this interval
+exactly under \eqref{eq:upper-beta}, and nonpositive throughout exactly under
+\eqref{eq:lower-beta}. If \(\beta\) lies strictly between the thresholds,
+small-decay and large-decay exponential integrands give opposite signs.
+Constants are integrated exactly.
+\end{proof}
+
+\section{The refinement-new-node rule}
+
+Define
+\begin{equation}
+N_{q,n}(f)
+=\frac{qT_{qn}(f)-T_n(f)}{q-1}.
+\label{eq:new-node}
+\end{equation}
+Cancellation of the coarse-grid nodes gives
+\begin{equation}
+N_{q,n}(f)
+=
+\frac{L}{n(q-1)}
+\sum_{j=0}^{n-1}\sum_{r=1}^{q-1}
+f\left(\frac{(j+r/q)L}{n}\right).
+\label{eq:new-node-explicit}
+\end{equation}
+Thus \(N_{q,n}\) is the equal-weight rule supported precisely on the new
+points introduced by \(q\)-fold refinement.
+
+For \(\alpha\in\R\), let
+\[
+S_{n,\alpha}(f)
+=\alpha T_n(f)+(1-\alpha)N_{q,n}(f),
+\]
+and extrapolate \(S_{n_j,\alpha}(f)\) in \(n_j^{-2}\) to zero.
+
+\begin{corollary}[Sharp new-node blend]
+\label{cor:new-node}
+The extrapolated rule is a universal upper bound on \(\cC_L\) if and only if
+\begin{equation}
+\boxed{
+\alpha\ge\frac{q^{2m-1}-1}{q^{2m}-1}.}
+\label{eq:alpha-upper}
+\end{equation}
+It is a universal lower bound if and only if
+\begin{equation}
+\boxed{\alpha\le0.}
+\label{eq:alpha-lower}
+\end{equation}
+For intermediate \(\alpha\), the error has no universal sign.
+\end{corollary}
+
+\begin{proof}
+By linearity, the extrapolate equals \(Q_\beta\) with
+\[
+\beta=\frac{q(1-\alpha)}{q-1}.
+\]
+Substitution into \cref{thm:blend} gives
+\eqref{eq:alpha-upper} and \eqref{eq:alpha-lower}.
+\end{proof}
+
+\begin{remark}[Midpoint and Simpson]
+For \(q=2\), \(N_{2,n}\) is the composite midpoint rule \(M_n\).
+Equation \eqref{eq:alpha-upper} becomes
+\[
+\alpha\ge
+\frac{2^{2m-1}-1}{2^{2m}-1}.
+\]
+At \(m=1\), the lower endpoint is the midpoint rule and the upper endpoint is
+Simpson's rule. For general \(m\), midpoint extrapolation is a strict lower
+bound and the critical midpoint--trapezoid blend is a strict upper bound for
+every nonconstant member of \(\cC_L\).
+\end{remark}
+
+\section{Scope and relation to earlier work}
+
+The theorem concerns finite positive Laplace transforms. This class permits
+unbounded derivative moments and does not require endpoint derivatives for an
+Euler--Maclaurin argument. The refinement factor is an integer because the
+upper constant \(q^{-1}\) comes from the spectral density of multiples of
+\(q\). The mesh counts themselves are arbitrary.
+
+Classical Romberg positivity proves one-sidedness through Peano kernels
+\cite{DahlquistBjorck}. Albrecht studied nested interval bounds
+\cite{Albrecht1972}; Ström studied strict bounds and monotonicity
+\cite{Strom1967,Strom1972}; Förster and Brass--Fischer developed Romberg error
+bounds \cite{Foerster1982,BrassFischer1999}; Fischer established definiteness
+for the Bulirsch sequence \cite{Fischer2002}; and averaged
+midpoint--trapezoid inequalities have been developed in several forms,
+including \cite{Liu2011}. Brass and Petras provide a modern monograph treatment
+of the surrounding quadrature theory \cite{BrassPetras}. The bounded claim
+here is the sharp error-ratio interval \((q^{-2m},q^{-1})\), its two independent
+endpoint mechanisms, and the exact consequences in
+\cref{cor:enclosure,thm:blend,cor:new-node}. This claim remains subject to
+full-text review of the close archival sources.
+
+For consecutive dyadic meshes, the upper endpoint agrees with the classical
+Romberg construction. No novelty is claimed for that specialization or for
+Richardson coefficients themselves.
+
+\section{Conclusion}
+
+The squared-mesh trapezoidal error of a finite positive Laplace transform has a
+positive complete Bernstein representation. Arbitrary origin extrapolation
+turns every spectral component into a positive product. Integer mesh
+refinement then selects the spectral modes divisible by \(q\), placing the
+refined error sharply between \(q^{-2m}\) and \(q^{-1}\) times the coarse
+error. The result supplies a certified enclosure and a complete classification
+of affine coarse--refined blends without geometric assumptions on the
+underlying panel counts.
+
+\begin{thebibliography}{99}
+
+\bibitem{Albrecht1972}
+J.~Albrecht,
+Intervallschachtelungen beim Romberg-Verfahren,
+\emph{Z. Angew. Math. Mech.} 52 (1972), 433--435.
+
+\bibitem{BrassFischer1999}
+H.~Brass and J.-W.~Fischer,
+Error bounds for Romberg quadrature,
+\emph{Numerische Mathematik} 82 (1999), 389--408.
+\url{https://doi.org/10.1007/s002110050424}
+
+\bibitem{BrassPetras}
+H.~Brass and K.~Petras,
+\emph{Quadrature Theory: The Theory of Numerical Integration on a Compact
+Interval}, Mathematical Surveys and Monographs 178,
+American Mathematical Society, Providence, 2011.
+\url{https://doi.org/10.1090/surv/178}
+
+\bibitem{DahlquistBjorck}
+G.~Dahlquist and \AA.~Bj\"orck,
+\emph{Numerical Methods in Scientific Computing, Volume I},
+SIAM, Philadelphia, 2008, Chapter~5.
+\url{https://jasoncantarella.com/downloads/Dahlquist-Bjorck-chapter-5.pdf}
+
+\bibitem{Fischer2002}
+J.-W.~Fischer,
+Romberg quadrature using the Bulirsch sequence,
+\emph{Numerische Mathematik} 90 (2002), 509--519.
+\url{https://doi.org/10.1007/s002110100271}
+
+\bibitem{Foerster1982}
+K.-J.~F\"orster,
+Fehlerschranken bei der Romberg-Quadratur,
+\emph{Z. Angew. Math. Mech.} 62 (1982), 133--135.
+\url{https://doi.org/10.1002/zamm.19820620209}
+
+\bibitem{Liu2011}
+Z.~Liu,
+More on the averaged midpoint-trapezoid type rules,
+\emph{Applied Mathematics and Computation} 218 (2011), 1389--1398.
+\url{https://www.sciencedirect.com/science/article/pii/S0096300311008484}
+
+\bibitem{SchillingSongVondracek}
+R.~L.~Schilling, R.~Song, and Z.~Vondra\v{c}ek,
+\emph{Bernstein Functions: Theory and Applications}, 2nd ed.,
+de Gruyter, Berlin, 2012.
+\url{https://doi.org/10.1515/9783110269338}
+
+\bibitem{Strom1967}
+T.~Str\"om,
+Strict error bounds in Romberg quadrature,
+\emph{BIT} 7 (1967), 314--321.
+\url{https://doi.org/10.1007/BF01939325}
+
+\bibitem{Strom1972}
+T.~Str\"om,
+Monotonicity in Romberg quadrature,
+\emph{Mathematics of Computation} 26 (1972), 461--465.
+\url{https://www.ams.org/journals/mcom/1972-26-118/home.html}
+
+\bibitem{Widder}
+D.~V.~Widder,
+\emph{The Laplace Transform},
+Princeton University Press, Princeton, 1941.
+
+\end{thebibliography}
+
+\end{document}
