@@ -37,6 +37,8 @@ multiples of \(q\).
 
 ## Repository map
 
+- [PUBLICATION_HANDOFF.md](PUBLICATION_HANDOFF.md): exact publication state,
+  unresolved gates, stop conditions, and the recommended route to submission.
 - [sharp_mesh_dilation_bounds.tex](sharp_mesh_dilation_bounds.tex): manuscript.
 - [proof_audit.md](proof_audit.md): proof obligations, edge cases, and static
   validation record.
@@ -56,6 +58,9 @@ verification programs and TeX build have not been executed in the
 resource-constrained preparation pass. The historical Romberg literature also
 needs an independent full-text review before a novelty claim is used in a
 formal submission.
+
+The [publication handoff](PUBLICATION_HANDOFF.md) is the durable session
+closeout and the authoritative checklist for future work.
 
 The proof is authoritative. The programs check transcription, endpoint
 behavior, and representative finite mixtures.
